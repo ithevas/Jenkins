@@ -36,7 +36,10 @@ pipeline {
                                     "target": "libs-release-local/"
                                 }
                             ]
-                        }'''
+                        }''',
+                        buildName: 'Calculator-App',
+                        buildNumber: '1',
+
                     )
                 }
             }

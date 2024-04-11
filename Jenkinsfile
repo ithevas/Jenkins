@@ -28,7 +28,7 @@ pipeline {
                     junit '**/target/surefire-reports/TEST-*.xml'
                     archiveArtifacts 'target/*.war'
                     rtUpload (
-                        serverId: 'artifactory-server-id',
+                        serverId: 'Artifactory',
                         spec: '''{
                             "files": [
                                 {

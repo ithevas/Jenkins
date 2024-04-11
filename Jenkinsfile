@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'devops', credentialsId: 'gitlab-creadential', url: 'https://git.nagarro.com/GITG00641/DotNet/divyanshu-mishra.git'
+                git branch: 'main', url: 'https://github.com/ithevas/Jenkins.git'
             }
         }
 

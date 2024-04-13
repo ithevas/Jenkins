@@ -23,25 +23,16 @@ pipeline {
                 //sh "mvn sonar:sonar"
             }
         }
-
-        stage('Upload to Artifactory'){
-            steps{
-                rtMavenDeployer{
-                    id: 'deployer',
-                    serverId: 'Artifactory',
-                    releaseRepo: 'libs-release-local',
-                    snapshotRepo: 'libs-snapshot-local'
-                }
-                rtMavenRun{
-                    pom: 'pom.xml',
-                    goals: 'clean install',
-                    deployerId: 'deployer'
-                }
-                rtPublisherBuildInfo{
-                    serverId: 'Artifactory'
-                }
-            }
+stage('Upload to Artifactory'){
+    steps {
+        script {
+            rtMavenDeployer id: 'deployer', serverId: 'Artifactory', releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local'
+            rtMavenRun pom: 'pom.xml', goals: 'clean install', deployerId: 'deployer'
+            rtPublisherBuildInfo serverId: 'Artifactory'
         }
+    }
+}
+
 
 //        stage('Package') {
 //            steps {

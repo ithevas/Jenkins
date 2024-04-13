@@ -32,7 +32,7 @@ pipeline {
                         spec: '''{
                             "files": [
                                 {
-                                    "pattern": "**/*",
+                                    "pattern": "target/*.war",
                                     "target": "jenkins-pipeline-local/"
                                 }
                             ]

@@ -38,13 +38,13 @@ pipeline {
                             ]
                         }''',
                         buildName: "Calculator-App",
-                        buildNumber: "1.0"
+                        buildNumber: buildNumber
                     )
 
                     rtPublishBuildInfo (
                         serverId: 'Artifactory',
                         buildName: 'Calculator-App',
-                        buildNumber: '1.0'
+                        buildNumber: buildNumber
                     )
                 }
             }

@@ -25,27 +25,31 @@ pipeline {
 
             post {
                 success {
-                    junit '**/target/surefire-reports/TEST-*.xml'
-                    archiveArtifacts 'target/*.war'
-                    rtUpload (
-                        serverId: 'Artifactory',
-                        spec: '''{
-                            "files": [
-                                {
-                                    "pattern": "target/*.war",
-                                    "target": "jenkins-pipeline-local/"
-                                }
-                            ]
-                        }''',
-                        buildName: "Calculator-App",
-                        buildNumber: buildNumber
-                    )
-
-                    rtPublishBuildInfo (
-                        serverId: 'Artifactory',
-                        buildName: 'Calculator-App',
-                        buildNumber: buildNumber
-                    )
+                    script {
+                        junit '**/target/surefire-reports/TEST-*.xml'
+                        archiveArtifacts artifacts: 'target/*.war', fingerprint: true
+            
+                        def buildNumber = env.BUILD_NUMBER
+                        rtUpload (
+                            serverId: 'Artifactory',
+                            spec: '''{
+                                "files": [
+                                    {
+                                        "pattern": "target/*.war",
+                                        "target": "jenkins-pipeline-local/"
+                                    }
+                                ]
+                            }''',
+                            buildName: "Calculator-App",
+                            buildNumber: buildNumber
+                        )
+            
+                        rtPublishBuildInfo (
+                            serverId: 'Artifactory',
+                            buildName: 'Calculator-App',
+                            buildNumber: buildNumber
+                        )
+                    }
                 }
             }
         }

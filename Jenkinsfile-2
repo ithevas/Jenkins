@@ -32,6 +32,7 @@ pipeline {
                         spec: '''{
                             "files": [
                                 {
+                                    "pattern": "target/*.war",
                                     "target": "jenkins-pipeline/"
                                 }
                             ]

@@ -30,7 +30,7 @@ pipeline {
                     id: 'deployer',
                     serverId: 'Artifactory',
                     releaseRepo: 'libs-release-local',
-                    snapshotRepo: 'libs-snapshottt-local'
+                    snapshotRepo: 'libs-snapshot-local'
                 }
                 rtMavenRun{
                     pom: 'pom.xml',

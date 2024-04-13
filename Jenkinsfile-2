@@ -33,7 +33,7 @@ pipeline {
                             "files": [
                                 {
                                     "pattern": "target/*.war",
-                                    "target": "libs-release-local/"
+                                    "target": "jenkins-pipeline/"
                                 }
                             ]
                         }'''

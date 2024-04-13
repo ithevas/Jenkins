@@ -29,7 +29,7 @@ pipeline {
                 script {
                     rtMavenDeployer id: 'deployer', serverId: 'Artifactory', releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local'
                     rtMavenRun pom: 'pom.xml', goals: 'clean install', deployerId: 'deployer'
-                    publishBuildInfo serverId: 'Artifactory'
+                    publishBuildInfo ()
                 }
             }
         }

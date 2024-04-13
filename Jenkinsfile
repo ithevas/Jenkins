@@ -18,31 +18,56 @@ pipeline {
             }
         }
 
-        stage('Package') {
+        stage('Sonar Analysis'){
             steps {
-                sh "mvn package"
+                //sh "mvn sonar:sonar"
             }
+        }
 
-            post {
-                success {
-                    junit '**/target/surefire-reports/TEST-*.xml'
-                    archiveArtifacts 'target/*.war'
-                    rtUpload (
-                        serverId: 'Artifactory',
-                        spec: '''{
-                            "files": [
-                                {
-                                    "pattern": "target/*.war",
-                                    "target": "libs-release-local/"
-                                }
-                            ]
-                        }''',
-                        buildName: 'Calculator-App',
-                        buildNumber: '1',
-
-                    )
+        stage('Upload to Artifactory'){
+            steps{
+                rtMavenDeployer{
+                    id: 'deployer',
+                    serverId: 'Artifactory',
+                    releaseRepo: 'libs-release-local',
+                    snapshotRepo: 'libs-snapshottt-local'
+                }
+                rtMavenRun{
+                    pom: 'pom.xml',
+                    goals: 'clean install',
+                    deployerId: 'deployer'
+                }
+                rtPublisherBuildInfo{
+                    serverId: 'Artifactory'
                 }
             }
         }
+
+//        stage('Package') {
+//            steps {
+//              sh "mvn package"
+//          }
+
+//          post {
+//              success {
+//                  junit '**/target/surefire-reports/TEST-*.xml'
+//                  archiveArtifacts 'target/*.war'
+//                  rtUpload (
+//                      serverId: 'Artifactory',
+//                      spec: '''{
+//                          "files": [
+//                              {
+//                                  "pattern": "target/*.war",
+//                                  "target": "libs-release-local/"
+//                              }
+//                          ]
+//                      }''',
+//                      buildName: 'Calculator-App',
+//                      buildNumber: '1',
+        
+//                    )
+//              }
+//          }
+//      }
     }
 }

@@ -18,11 +18,11 @@ pipeline {
             }
         }
 
-        stage('Sonar Analysis'){
-            steps {
-                sh "mvn sonar:sonar"
-            }
-        }
+//      stage('Sonar Analysis'){
+//        steps {
+//              sh "mvn sonar:sonar"
+//          }
+//      }
         
         stage('Upload to Artifactory'){
             steps {

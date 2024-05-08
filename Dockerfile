@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/CalculateApp.war /app/CalculateApp.war
 
 # Expose port 8080 to the outside world
-EXPOSE 8080
+EXPOSE 8090
 
 # Run the Spring Boot application when the container launches
 CMD ["java", "-jar", "/app/CalculateApp.war"]
